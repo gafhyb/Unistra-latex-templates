@@ -133,7 +133,7 @@
 \section*{Mises à jour du document}
 \begin{tabular}{|p{0.09\textwidth}|p{0.13\textwidth}|p{0.25\textwidth}|p{0.38\textwidth}|}
 \hline
-\textbf{Version} & \textbf{Date} & \textbf{Rédacteur} & \textbf{Objet de la mis à jour}\\
+\textbf{Version} & \textbf{Date} & \textbf{Rédacteur} & \textbf{Objet de la mise à jour}\\
 \hline
 }
 {

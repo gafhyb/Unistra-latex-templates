@@ -1,0 +1,33 @@
+% Copyright 2009 by Virgile Gerecke
+% Direction Informatique
+% Université de Strasbourg
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\mode<presentation>
+
+\useoutertheme{tree}
+
+\defbeamertemplate*{footline}{infolines theme}
+{
+  \leavevmode%
+  \hbox{%
+  \setlength\unitlength{1cm}
+	\begin{picture}(0,0)
+	\put(0,0){\includegraphics[scale=0.45]{pied.jpg}}
+	\put(11,0){\includegraphics[scale=0.13]{logo-uds.pdf}}
+	\put(0.5,0.4){\textcolor{white}{www.unistra.fr}}
+	\end{picture}
+
+  }%
+  \vskip0pt%
+}
+
+
+\mode
+<all>

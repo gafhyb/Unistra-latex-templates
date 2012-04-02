@@ -9,7 +9,7 @@
 %
 % See the file doc/licenses/LICENSE for more details.
 
-\RequirePackage[absolute,overlay,showboxes]{textpos}
+\RequirePackage[absolute,overlay]{textpos}
 \RequirePackage{pstricks}
 
 \newif\ifbeamer@tree@showhooks
@@ -29,16 +29,50 @@
   \end{frame} 
 }
 
+\defbeamertemplate*{title page}{unistra}[1][]
+{
+  \vbox{}
+  \vfill
+  \begin{centering}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center,#1]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}\vskip0.5em
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+  \end{centering}
+  \vfill
+}
+
 
 \defbeamertemplate*{headline}{unistra theme}
 {
-	
+\begin{textblock*}{31mm}[0,0](97mm,0.1mm)
+\begin{minipage}[c][13mm]{31mm}
+\footnotesize\insertshorttitle
+
+\tiny\insertdate
+\end{minipage}
+\end{textblock*} 
+
+\begin{textblock}{4}(12,0)
+  \includegraphics[scale=0.40]{fond.png}
+\end{textblock}  
 	
     \begin{beamercolorbox}[wd=\paperwidth,colsep=1.5pt]{upper separation line head}
-    \end{beamercolorbox}
-    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex,%
-      leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}
-      \insertshorttitle
     \end{beamercolorbox}
     \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex,%
       leftskip=.3cm,rightskip=.3cm plus1fil]{section in head/foot}

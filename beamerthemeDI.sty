@@ -1,0 +1,124 @@
+% Copyright 2009 by Virgile Gerecke
+% Direction Informatique
+% Université de Strasbourg
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\RequirePackage[absolute,overlay,showboxes]{textpos}
+\RequirePackage{pstricks}
+
+\newif\ifbeamer@tree@showhooks
+\beamer@tree@showhookstrue
+
+\DeclareOptionBeamer{hooks}[true]{\csname beamer@tree@showhooks#1\endcsname}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\definecolor{unistra}{rgb}{0.1,0.44,0.72}
+\definecolor{lightgrey}{rgb}{0.92,0.92,092}
+
+\AtBeginSection[]{
+  \begin{frame}{Plan}
+  \small \tableofcontents[currentsection, hideothersubsections]
+  \end{frame} 
+}
+
+
+\defbeamertemplate*{headline}{unistra theme}
+{
+	
+	
+    \begin{beamercolorbox}[wd=\paperwidth,colsep=1.5pt]{upper separation line head}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}
+      \insertshorttitle
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{section in head/foot}
+      \usebeamerfont{section in head/foot}%
+      \ifbeamer@tree@showhooks
+        \setbox\beamer@tempbox=\hbox{\insertsectionhead}%
+        \ifdim\wd\beamer@tempbox>1pt%
+          \hskip2pt\raise1.9pt\hbox{\vrule width0.4pt height1.875ex\vrule width 5pt height0.4pt}%
+          \hskip1pt%
+        \fi%
+      \else%  
+        \hskip6pt%
+      \fi%
+      \insertsectionhead
+    \end{beamercolorbox}
+        \begin{beamercolorbox}[wd=\paperwidth,colsep=1.5pt]{lower separation line head}
+    \end{beamercolorbox}	
+	
+  	
+  
+}
+
+\defbeamertemplate*{footline}{unistra foot}
+{
+	\leavevmode%
+  \hbox{%
+  \setlength\unitlength{1cm}
+	\begin{picture}(0,0)
+	\put(10.5,0){\includegraphics[scale=0.15]{logo-uds.pdf}}
+	\end{picture}
+
+  }%
+  \vskip0pt%
+}
+
+\setbeamerfont{frametitle}{parent=section,size=\Large}
+
+\defbeamertemplate*{frametitle}{unistra}[1][left]
+{
+  \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  \@tempdima=\textwidth%
+  \advance\@tempdima by\beamer@leftmargin%
+  \advance\@tempdima by\beamer@rightmargin%
+  \begin{beamercolorbox}[sep=0.3cm,#1,wd=\the\@tempdima]{frametitle}
+    \usebeamerfont{frametitle}%
+    \vbox{}\vskip-1ex%
+    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+    \strut\textcolor{white}\insertframetitle\strut\par%
+    {%
+      \ifx\insertframesubtitle\@empty%
+      \else%
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+      \fi
+    }%
+    \vskip-1ex%
+    \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+  \end{beamercolorbox}%
+}
+
+
+\setbeamercolor{alerted text}{fg=unistra!80!yellow}
+\setbeamercolor*{palette primary}{fg=unistra}
+\setbeamercolor*{palette secondary}{fg=white,bg=unistra}
+\setbeamercolor*{palette tertiary}{fg=white,bg=unistra}
+\setbeamercolor*{palette quaternary}{fg=white,bg=unistra}
+
+\setbeamercolor*{sidebar}{fg=unistra,bg=orange!75!white}
+
+\setbeamercolor*{palette sidebar primary}{fg=white,bg=unistra}
+\setbeamercolor*{palette sidebar secondary}{fg=white,bg=unistra}
+\setbeamercolor*{palette sidebar tertiary}{fg=white,bg=unistra}
+\setbeamercolor*{palette sidebar quaternary}{fg=white,bg=unistra}
+
+\setbeamercolor*{titlelike}{parent=palette primary}
+\setbeamercolor{frametitle}{bg=unistra}
+\setbeamercolor{frametitle right}{bg=green!60!orange}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+
+\mode
+<all>

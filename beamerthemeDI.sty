@@ -23,6 +23,11 @@
 \definecolor{unistra}{rgb}{0.1,0.44,0.72}
 \definecolor{lightgrey}{rgb}{0.92,0.92,092}
 
+\newenvironment{adresses}[1]
+{
+\def\Adresses{#1}
+}
+
 \AtBeginSection[]{
   \begin{frame}{Plan}
   \small \tableofcontents[currentsection, hideothersubsections]
@@ -32,34 +37,54 @@
 \defbeamertemplate*{title page}{unistra}[1][]
 {
   \vbox{}
+  \setlength\unitlength{1cm}
+ 	 \begin{picture}(0,0)
+	\put(-2,-6.1){\includegraphics[scale=0.5]{fondAccueil.pdf}}
+	\end{picture}
+	\begin{picture}(0,0)
+	\put(7,-6.1){\includegraphics[scale=0.5]{accueil.jpg}}
+	\end{picture}
   \vfill
-  \begin{centering}
-    \begin{beamercolorbox}[sep=8pt,center,#1]{title}
-      \usebeamerfont{title}\inserttitle\par%
+  
+  \begin{flushright}
+    \begin{textblock*}{80mm}[0,0](0mm,0.1mm)
+    \vskip3em
+      \Huge\textcolor{white}\inserttitle\par%
       \ifx\insertsubtitle\@empty%
       \else%
-        \vskip0.25em%
+        \vskip1em%
         {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-      \fi%     
-    \end{beamercolorbox}%
+      \fi%
+      \end{textblock*}%
+      \begin{textblock*}{80mm}[0,0](0mm,70mm)
+      \scriptsize{\textcolor{white}{\textbf{\insertauthor}}}
+      
+      \ifx\Adresses\@empty%
+      \else%
+      \textcolor{white}{\textit{\Adresses}}
+      \fi%
+      
+      \scriptsize{
+	\textcolor{white}{\textbf{Direction Informatique}}
+	
+	\textcolor{white}{\insertdate}
+	}
+	\vskip0.5em
+    \end{textblock*}%
     \vskip1em\par
     \begin{beamercolorbox}[sep=8pt,center,#1]{author}
-      \usebeamerfont{author}\insertauthor
-    \end{beamercolorbox}
-    \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
-      \usebeamerfont{institute}\insertinstitute
     \end{beamercolorbox}
     \begin{beamercolorbox}[sep=8pt,center,#1]{date}
-      \usebeamerfont{date}\insertdate
     \end{beamercolorbox}\vskip0.5em
     {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
-  \end{centering}
+  \end{flushright}
   \vfill
 }
 
 
 \defbeamertemplate*{headline}{unistra theme}
 {
+\ifnum\thepage>1
 \begin{textblock*}{31mm}[0,0](97mm,0.1mm)
 \begin{minipage}[c][13mm]{31mm}
 \footnotesize\inserttitle
@@ -89,10 +114,8 @@
       \insertsectionhead
     \end{beamercolorbox}
         \begin{beamercolorbox}[wd=\paperwidth,colsep=1.5pt]{lower separation line head}
-    \end{beamercolorbox}	
-	
-  	
-  
+    \end{beamercolorbox}
+  \fi
 }
 
 \defbeamertemplate*{footline}{unistra foot}

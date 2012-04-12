@@ -39,10 +39,10 @@
   \vbox{}
   \setlength\unitlength{1cm}
  	 \begin{picture}(0,0)
-	\put(-2,-6.1){\includegraphics[scale=0.5]{fondAccueil.pdf}}
+	\put(-2,-5.9){\includegraphics[scale=0.5]{fondAccueil.pdf}}
 	\end{picture}
 	\begin{picture}(0,0)
-	\put(7,-6.1){\includegraphics[scale=0.5]{accueil.jpg}}
+	\put(7,-5.9){\includegraphics[scale=0.5]{accueil.jpg}}
 	\end{picture}
   \vfill
   
@@ -84,21 +84,25 @@
 
 \defbeamertemplate*{headline}{unistra theme}
 {
+
 \ifnum\thepage>1
 \begin{textblock*}{31mm}[0,0](97mm,0.1mm)
 \begin{minipage}[c][13mm]{31mm}
 \footnotesize\inserttitle
 
+
 \tiny\insertdate
 \end{minipage}
 \end{textblock*} 
 
+
 \begin{textblock}{4}(12,0)
   \includegraphics[scale=0.40]{fond.png}
 \end{textblock}  
+
 	
     \begin{beamercolorbox}[wd=\paperwidth,colsep=1.5pt]{upper separation line head}
-    \end{beamercolorbox}
+    \end{beamercolorbox}\fi
     \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex,%
       leftskip=.3cm,rightskip=.3cm plus1fil]{section in head/foot}
       \usebeamerfont{section in head/foot}%
@@ -115,7 +119,6 @@
     \end{beamercolorbox}
         \begin{beamercolorbox}[wd=\paperwidth,colsep=1.5pt]{lower separation line head}
     \end{beamercolorbox}
-  \fi
 }
 
 \defbeamertemplate*{footline}{unistra foot}
@@ -124,10 +127,14 @@
   \hbox{%
   \setlength\unitlength{1cm}
 	\begin{picture}(0,0)
-	\put(6.5,0){\includegraphics[scale=0.15]{logo-uds.pdf}}
+	\put(6.5,0){\includegraphics[scale=0.14]{logo-uds.pdf}}
 	\end{picture}
-
   }%
+  \ifnum\thepage>1
+  \begin{textblock*}{2mm}[0,0](120mm,90mm)
+	\thepage
+  \end{textblock*}
+  \fi
   \vskip0pt%
 }
 

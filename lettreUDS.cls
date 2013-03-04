@@ -64,7 +64,7 @@
 {\end{textblock*}}
 
 \newenvironment{departement}
-{\begin{textblock*}{45mm}[0,0](10mm,270mm)
+{\begin{textblock*}{45mm}[0,0](10mm,260mm)
 \footnotesize
 }
 {\\

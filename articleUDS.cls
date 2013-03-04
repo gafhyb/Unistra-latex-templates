@@ -44,13 +44,13 @@
 {
 \lfoot{\Projet}
 \rfoot{\@title}
-\rhead
+\lhead
 {
 \vspace{-10mm}
 \raisebox{-6mm}{
 \includegraphics[scale=0.2]{logo-uds.pdf}}
 }
-\lhead{\Emetteur}
+\rhead{\Emetteur}
 \cfoot{\thepage / \pageref{LastPage}}
 }
 
@@ -61,13 +61,13 @@
 
 \lfoot{\Projet}
 \rfoot{\@title}
-\rhead
+\lhead
 {
 \vspace{-10mm}
 \raisebox{-6mm}{
 \includegraphics[scale=0.2]{logo-uds.pdf}}
 }
-\lhead{\Emetteur}
+\rhead{\Emetteur}
 \cfoot{\thepage / \pageref{LastPage}}
 }
 

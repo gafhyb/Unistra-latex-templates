@@ -11,7 +11,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
-\RequirePackage{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+\RequirePackage[paper=a4paper]{geometry}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[francais]{babel}
 \RequirePackage{graphicx}

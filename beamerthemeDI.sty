@@ -86,14 +86,6 @@
 {
 
 \ifnum\thepage>1
-\begin{textblock*}{42.5mm}[0,0](85mm,0.1mm)
-\begin{minipage}[c][13mm]{31mm}
-\footnotesize\inserttitle
-
-
-\tiny\insertdate
-\end{minipage}
-\end{textblock*} 
 
 
 \begin{textblock}{5.6}(10.2,0)
@@ -119,6 +111,17 @@
     \end{beamercolorbox}
         \begin{beamercolorbox}[wd=\paperwidth,colsep=1.5pt]{lower separation line head}
     \end{beamercolorbox}
+
+\ifnum\thepage>1
+\begin{textblock*}{42.5mm}[0,0](85mm,0.1mm)
+\begin{minipage}[c][13mm]{40mm}
+\footnotesize\inserttitle
+
+
+\tiny\insertdate
+\end{minipage}
+\end{textblock*} 
+\fi
 }
 
 \defbeamertemplate*{footline}{unistra foot}

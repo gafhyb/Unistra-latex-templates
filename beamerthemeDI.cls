@@ -1,0 +1,212 @@
+% Copyright 2015 by Virgile Gerecke
+% Direction Informatique
+% Université de Strasbourg
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{pstricks}
+
+%    ****************************************
+%    *             FORMAT                   *
+%    ****************************************
+
+
+\ProvidesClass{beamerthemeDI}
+\LoadClass[aspectratio=169]{beamer}
+
+\newif\ifbeamer@tree@showhooks
+\beamer@tree@showhookstrue
+
+\DeclareOptionBeamer{hooks}[true]{\csname beamer@tree@showhooks#1\endcsname}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\definecolor{unistra}{rgb}{0.1,0.44,0.72}
+\definecolor{lightgrey}{rgb}{0.92,0.92,092}
+
+\newenvironment{adresses}[1]
+{
+\def\Adresses{#1}
+}
+
+\AtBeginSection[]{
+  \begin{frame}{Plan}
+  \small \tableofcontents[currentsection, hideothersubsections]
+  \end{frame} 
+}
+
+%    ****************************************
+%    *            PAGE DE GARDE             *
+%    ****************************************
+\defbeamertemplate*{title page}{unistra}[1][]
+{
+  \vbox{}
+  \setlength\unitlength{1cm}
+ 	 \begin{picture}(0,0)
+	\put(-2,-5.5){\includegraphics[scale=0.5]{fondAccueil.pdf}}
+	\end{picture}
+	\begin{picture}(0,0)
+	\put(9.9,-5.5){\includegraphics[scale=0.5]{accueil.jpg}}
+	\end{picture}
+  \vfill
+  
+  \begin{flushright}
+    \begin{textblock*}{108mm}[0,0](0mm,0.1mm)
+    \vskip3em
+      \Huge\textcolor{white}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip1em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%
+      \end{textblock*}%
+      \begin{textblock*}{108mm}[0,0](0mm,65mm)
+      \scriptsize{\textcolor{white}{\textbf{\insertauthor}}}
+      
+      \ifx\Adresses\@empty%
+      \else%
+      \textcolor{white}{\textit{\Adresses}}
+      \fi%
+      
+      \scriptsize{
+	\textcolor{white}{\textbf{Direction Informatique}}
+	
+	\textcolor{white}{\insertdate}
+	}
+	\vskip0.5em
+    \end{textblock*}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center,#1]{author}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{date}
+    \end{beamercolorbox}\vskip0.5em
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+  \end{flushright}
+  \vfill
+}
+
+
+\defbeamertemplate*{headline}{unistra theme}
+{
+
+\ifnum\thepage>1
+
+
+\begin{textblock}{5.6}(10.2,0)
+  \includegraphics[scale=0.40]{fond.png}
+\end{textblock}  
+
+	
+    \begin{beamercolorbox}[wd=\paperwidth,colsep=1.5pt]{upper separation line head}
+    \end{beamercolorbox}\fi
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{section in head/foot}
+      \usebeamerfont{section in head/foot}%
+      \ifbeamer@tree@showhooks
+        \setbox\beamer@tempbox=\hbox{\insertsectionhead}%
+        \ifdim\wd\beamer@tempbox>1pt%
+          \hskip2pt\raise1.9pt\hbox{\vrule width0.4pt height1.875ex\vrule width 5pt height0.4pt}%
+          \hskip1pt%
+        \fi%
+      \else%  
+        \hskip6pt%
+      \fi%
+      \insertsectionhead
+    \end{beamercolorbox}
+        \begin{beamercolorbox}[wd=\paperwidth,colsep=1.5pt]{lower separation line head}
+    \end{beamercolorbox}
+
+\ifnum\thepage>1
+\begin{textblock*}{42.5mm}[0,0](85mm,0.1mm)
+\begin{minipage}[c][13mm]{40mm}
+\footnotesize\inserttitle
+
+
+\tiny\insertdate
+\end{minipage}
+\end{textblock*} 
+\fi
+}
+
+\defbeamertemplate*{footline}{unistra-jres foot}
+{
+	\leavevmode%
+  \hbox{%
+  \setlength\unitlength{1cm}
+	\begin{picture}(0,0)
+	\put(6.5,0){\includegraphics[scale=0.14]{logo-uds.pdf}}
+	\end{picture}
+  }%
+	\leavevmode%
+  \hbox{%
+  \setlength\unitlength{1cm}
+	\begin{picture}(0,0)
+	\put(8.5,-0.9){\includegraphics[scale=0.09]{jres.pdf}}
+	\end{picture}
+  }%
+  \ifnum\thepage>1
+  \begin{textblock*}{2mm}[0,0](120mm,90mm)
+	\thepage
+  \end{textblock*}
+  \fi
+  \vskip0pt%
+}
+
+\setbeamerfont{frametitle}{parent=section,size=\Large}
+
+\defbeamertemplate*{frametitle}{unistra}[1][left]
+{
+  \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  \@tempdima=\textwidth%
+  \advance\@tempdima by\beamer@leftmargin%
+  \advance\@tempdima by\beamer@rightmargin%
+  \begin{beamercolorbox}[sep=0.3cm,#1,wd=\the\@tempdima]{frametitle}
+    \usebeamerfont{frametitle}%
+    \vbox{}\vskip-1ex%
+    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+    \strut\textcolor{white}\insertframetitle\strut\par%
+    {%
+      \ifx\insertframesubtitle\@empty%
+      \else%
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+      \fi
+    }%
+    \vskip-1ex%
+    \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+  \end{beamercolorbox}%
+}
+
+
+
+
+\setbeamercolor{alerted text}{fg=unistra!80!yellow}
+\setbeamercolor*{palette primary}{fg=unistra}
+\setbeamercolor*{palette secondary}{fg=white,bg=unistra}
+\setbeamercolor*{palette tertiary}{fg=white,bg=unistra}
+\setbeamercolor*{palette quaternary}{fg=white,bg=unistra}
+
+\setbeamercolor*{sidebar}{fg=white,bg=unistra!75!white}
+
+\setbeamercolor*{palette sidebar primary}{fg=white,bg=unistra}
+\setbeamercolor*{palette sidebar secondary}{fg=white,bg=unistra}
+\setbeamercolor*{palette sidebar tertiary}{fg=white,bg=unistra}
+\setbeamercolor*{palette sidebar quaternary}{fg=white,bg=unistra}
+
+\setbeamercolor*{titlelike}{parent=palette primary}
+\setbeamercolor{frametitle}{bg=unistra}
+\setbeamercolor{frametitle right}{bg=green!60!orange}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\setbeamercolor{structure}{fg=unistra}
+
+\mode
+<all>

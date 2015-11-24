@@ -92,6 +92,9 @@
   \vfill
 }
 
+%    ****************************************
+%    *            PAGE STANDARD            *
+%    ****************************************
 
 \defbeamertemplate*{headline}{unistra theme}
 {
@@ -99,9 +102,9 @@
 \ifnum\thepage>1
 
 
-\begin{textblock}{5.6}(10.2,0)
+\begin{textblock*}{5.6mm}[0,0](97.5mm,0mm)
   \includegraphics[scale=0.40]{fond.png}
-\end{textblock}  
+\end{textblock*}  
 
 	
     \begin{beamercolorbox}[wd=\paperwidth,colsep=1.5pt]{upper separation line head}
@@ -124,8 +127,8 @@
     \end{beamercolorbox}
 
 \ifnum\thepage>1
-\begin{textblock*}{42.5mm}[0,0](85mm,0.1mm)
-\begin{minipage}[c][13mm]{40mm}
+\begin{textblock*}{42.5mm}[0,0](100mm,0.1mm)
+\begin{minipage}[c][13mm]{55mm}
 \footnotesize\inserttitle
 
 

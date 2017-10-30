@@ -1,7 +1,7 @@
 %  %NAME%    : reportUDS
 %  %AUTHOR%  : Virgile Gerecke - Université de Strasbourg
 %  %EMAIL%   : virgile.gerecke@unistra.fr
-%  %VERSION% : v2.0
+%  %VERSION% : v1.0
 %% 
 %% This is file `reportUDS.cls'.
 
@@ -9,24 +9,57 @@
 %    *             PREAMBULE                *
 %    ****************************************
 
+\LoadClass[a4paper,11pt]{report}
+
 \NeedsTeXFormat{LaTeX2e}
 
-\RequirePackage[T1]{fontenc}
 \RequirePackage{geometry} % see geometry.pdf on how to lay out the page. There's lots.
-\RequirePackage[utf8]{inputenc}
+%\RequirePackage[utf8]{inputenc}
 \RequirePackage[francais]{babel}
 \RequirePackage{graphicx}
 \RequirePackage{fancyhdr}
 \RequirePackage{url}
-\RequirePackage{color}
-\urlstyle{sf}
+\urlstyle{same}
 \RequirePackage{lastpage}
-\RequirePackage{tikz}
-\RequirePackage{bbding}
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{textcomp}
+\RequirePackage{color}
 
-\ProvidesClass{reportUDS}[2009/12/01 v2.0]
+\usepackage{titlesec}
+\usepackage{titling}
+\RequirePackage{fontspec}
+\RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
 
-\LoadClass[a4paper,11pt]{report}
+\ProvidesClass{reportUDS}[2017/10/30 v2.0]
+
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont[Mapping=tex-text, Color=textcolor, Scale=0.85]{Unistra A}
+
+\newfontfamily\bodyfont[]{Unistra A}
+\newfontfamily\symbol[]{Unistra Symbol}
+\newfontfamily\encadre[]{Unistra Encadre}
+\newfontfamily\headingfont[Scale=0.85]{Unistra A}
+
+\newcommand{\unistra}{\fontfamily{Unistra A}\selectfont} % Latin Modern Roman
+
+
+\newenvironment{service}[1]
+{\def\svc{#1}
+}
+
+\newenvironment{organisme}[1]
+{\def\orgunit{#1}
+}
+
+\newenvironment{symboles}[1]
+{\def\symbols{#1}
+}
+
+\newcommand\logo
+{\begin{textblock*}{65mm}[0,0](10mm,15mm)
+{\color{red} \fontsize{60}{70} \symbol \symbols}\\
+~{\Large \encadre (\svc\_))\_)\vspace*{-0.075\baselineskip} \hspace*{10mm}(\_)))\orgunit)\_)}
+\end{textblock*}}
 
 %    ****************************************
 %    *             MISE EN PAGE             *
@@ -36,168 +69,61 @@
 \renewcommand{\sfdefault}{phv} % Arial
 \renewcommand{\headrulewidth}{0pt} % Suppression de la ligne d'en tete
 
-\geometry{margin={65pt}}
+\geometry{margin={50pt}}
 \fancyhf{} % Suppression du style existant
  
 \fancypagestyle{plain} % Style de la premiere page
 {
-\lfoot{\Projet}
-\rfoot{\@title}
-\rhead
-{
-\vspace{-10mm}
-\raisebox{-6mm}{
-\includegraphics[scale=0.2]{logo-uds.pdf}}
-}
-\lhead{\Emetteur}
+\lfoot{\tp}
 \cfoot{\thepage / \pageref{LastPage}}
 }	 
 
 \fancypagestyle{fancyplain} % Style des pages suivantes
 {
-\setlength{\textheight}{250mm}  	% Hauteur de la zone de texte
-\setlength{\headsep}{10mm}  	% Entre le haut de page et le texte 
 
-\lfoot{\Projet}
-\rfoot{\@title}
-\rhead
-{
-\vspace{-10mm}
-\raisebox{-6mm}{
-\includegraphics[scale=0.2]{logo-uds.pdf}}
-}
-\lhead{\Emetteur}
+\fancyhf{}
+\setlength{\textheight}{270mm}  	% Hauteur de la zone de texte
+\setlength{\headsep}{0mm}  	% Entre le haut de page et le texte 
+\lfoot{\tp}
 \cfoot{\thepage / \pageref{LastPage}}
+\rfoot{\encadre (\svc\_))\_)}
 }
-
-\definecolor{shade}{HTML}{DDDDDD}
 
 %    ****************************************
 %    *          VARIABLES                   *
 %    ****************************************
 %
-\newenvironment{projet}[1]
+
+\newenvironment{titrePage}[1]
 {
-\def\Projet{#1}
+\def\tp{#1}
 }
-
-\projet{}
-
-\newenvironment{version}[1]
-{
-\def\Version{#1}
-}
-
-\version{}
-
-\newenvironment{emetteur}[1]
-{
-\def\Emetteur{#1}
-}
-
-\emetteur{}
-
-\newenvironment{etat}[1]
-{
-\def\Etat{#1}
-}
-
-\etat{}
-
-\newenvironment{objet}[1]
-{
-\def\Objet{#1}
-}
-
-\objet{}
-
-\newenvironment{diffusion}[1]
-{
-\def\Diffusion{#1}
-}
-
-\diffusion{}
-
-%    ****************************************
-%    *          Tableau de revisions               *
-%    ****************************************
-%
-\newenvironment{revision}[4]
-{
- #1 & #2 & #3 & #4\\
- \hline
-}
-
-\newenvironment{revisions}
-{
-\section*{Mises à jour du document}
-\begin{tabular}{|p{0.09\textwidth}|p{0.13\textwidth}|p{0.25\textwidth}|p{0.38\textwidth}|}
-\hline
-\textbf{Version} & \textbf{Date} & \textbf{Rédacteur} & \textbf{Objet de la mise à jour}\\
-\hline
-}
-{
-\end{tabular}
-}
-
-%    ****************************************
-%    *          Page de garde                   *
-%    ****************************************
-%
 
 \renewcommand\maketitle{\begin{titlepage}%
   \begin{figure}[h]
   \vspace{10mm}
-  \hspace{1mm}
-  \includegraphics[scale=0.6]{logo-uds.pdf}
+  \hspace{-10mm}
+ \logo
   \vspace{50mm}
   \end{figure}
-  \vspace{-92mm}
-
-\hspace*{0.45\linewidth}
-\begin{minipage}[t][-35mm]{0.55\linewidth}
-{\Huge \Projet}
-\bigskip
-\bigskip
-\bigskip
-
-{\Large \@title}
-\end{minipage}
-
+  \vspace{-50mm}
 
   \let\footnotesize\small
   \let\footnoterule\relax
   \let \footnote \thanks
-  
   \null\vfil
-  \vskip 40\p@
-
-\begin{tikzpicture}
-\node [fill=shade,rounded corners=5pt]
-{
-\begin{tabular}{p{0.3\textwidth}|p{0.56\textwidth}}
-  \textbf{Dernière mise à jour} &  \@date \\
-  \textbf{Version} & \Version\\
-  \textbf{Etat} & \Etat \\
-  \textbf{Pages} & \pageref{LastPage} \\
-  \textbf{Diffusion} & \Diffusion \\
-\end{tabular}
-};
-\end{tikzpicture}
-
- \vskip 40\p@
-\begin{tikzpicture}
-\node [fill=shade,rounded corners=5pt]
-{
-\begin{tabular}{p{0.3\textwidth}|p{0.56\textwidth}}
-  \textbf{Objet} & \Objet  \\
-\end{tabular}
-};
-\end{tikzpicture}
-
-
-
-  \par
+  \vskip 60\p@
+  \begin{center}%
+    {\LARGE \@title \par}%
+    \vskip 3em%
+    {\large
+     \lineskip .75em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+      \vskip 1.5em%
+    {\large \@date \par}%       % Set date in \large size.
+  \end{center}\par
   \@thanks
   \vfil\null
   \end{titlepage}%
@@ -209,6 +135,7 @@
   \global\let\date\relax
   \global\let\and\relax
 }
+
 
 
 \AtBeginDocument{%

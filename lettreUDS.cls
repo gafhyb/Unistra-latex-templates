@@ -9,22 +9,30 @@
 %    *             PREAMBULE                *
 %    ****************************************
 
+\LoadClass[a4paper,10pt]{letter}
+
 \NeedsTeXFormat{LaTeX2e}
 
 \RequirePackage{listings}
 \RequirePackage{color}
-\RequirePackage[utf8]{inputenc}
-\RequirePackage[francais]{babel}
 \RequirePackage{graphicx}
 \RequirePackage{helvet}
-\RequirePackage[T1]{fontenc}
 \RequirePackage{fancyhdr}
 \RequirePackage[absolute,overlay]{textpos}
 \RequirePackage{textcomp}
 
-\ProvidesClass{lettreUDS}[2009/08/22 v1.0]
+\RequirePackage[quiet]{fontspec}
+\RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
 
-\LoadClass[a4paper,10pt]{letter}
+\newfontfamily\bodyfont[]{Unistra A}
+\newfontfamily\symbol[]{Unistra Symbol}
+\newfontfamily\encadre[]{Unistra Encadre}
+\newfontfamily\headingfont[Scale=0.85]{Helvetica Neue Condensed Bold}
+
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont[Mapping=tex-text, Color=textcolor, Scale=0.85]{Unistra A}
+
+\ProvidesClass{lettreUDS}[2009/10/30 v2.0]
 
 %    ****************************************
 %    *             MISE EN PAGE             *
@@ -50,21 +58,14 @@
 %    ****************************************
 %
 
-\newenvironment{service}
-{\begin{textblock*}{45mm}[0,0](10mm,100mm)
-\bf
-\footnotesize
-}
-{\end{textblock*}}
-
 \newenvironment{expediteur}
-{\begin{textblock*}{45mm}[0,0](10mm,125mm)
+{\begin{textblock*}{41mm}[0,0](10mm,225mm)
 \footnotesize
 }
 {\end{textblock*}}
 
 \newenvironment{departement}
-{\begin{textblock*}{45mm}[0,0](10mm,270mm)
+{\begin{textblock*}{41mm}[0,0](10mm,260mm)
 \footnotesize
 }
 {\\
@@ -80,19 +81,32 @@
 \end{minipage}
 }
 
+\newenvironment{service}[1]
+{\def\svc{#1}
+}
+
+\newenvironment{organisme}[1]
+{\def\orgunit{#1}
+}
+
+\newenvironment{symboles}[1]
+{\def\symbols{#1}
+}
+
 \newcommand\logo
 {\begin{textblock*}{45mm}[0,0](10mm,15mm)
-\includegraphics[scale=0.37]{logo-uds.pdf}
+{\color{red} \fontsize{60}{70} \symbol \symbols}\\
+~{\Large \encadre (\svc\_))\_)\vspace*{-0.075\baselineskip} \hspace*{10mm}(\_)))\orgunit)\_)}
 \end{textblock*}}
 
 \newenvironment{lieu}[1]
-{{\footnotesize
+{{
 #1, le \today}
 
 }
 
 \newenvironment{objet}[1]
-{{\footnotesize
+{\textbf{
 Objet : #1\\}
 }
 
@@ -118,10 +132,11 @@ Réf. : #1}
 }
 
 \fancypagestyle{plain}{
+\bodyfont
 \setlength{\textheight}{215mm}  	% Hauteur de la zone de texte
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
-\fancyfoot[R]{\includegraphics[scale=0.20]{logo-uds.pdf} \vspace{-10mm}}
+%\fancyfoot[R]{\includegraphics[scale=0.20]{logo-uds.pdf} \vspace{-10mm}}
 }
 
 \AtBeginDocument{%

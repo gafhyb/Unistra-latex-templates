@@ -22,10 +22,10 @@
 \RequirePackage{textcomp}
 
 \RequirePackage[quiet]{fontspec}
-\RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
+% \RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
 
 \newfontfamily\bodyfont[]{Unistra A}
-\newfontfamily\symbol[]{Unistra Symbol}
+\newfontfamily\unistraSymbol[]{Unistra Symbol}
 \newfontfamily\encadre[]{Unistra Encadre}
 \newfontfamily\headingfont[Scale=0.85]{Helvetica Neue Condensed Bold}
 
@@ -90,12 +90,14 @@
 }
 
 \newenvironment{symboles}[1]
-{\def\symbols{#1}
+{\def\unistraSymbols{#1}
 }
 
 \newcommand\logo
 {\begin{textblock*}{45mm}[0,0](10mm,15mm)
-{\color{red} \fontsize{60}{70} \symbol \symbols}\\
+\ifdefined\unistraSymbols
+{\color{red} \fontsize{60}{70} \unistraSymbol \unistraSymbols}\\
+\fi
 ~{\Large \encadre (\svc\_))\_)\vspace*{-0.075\baselineskip} \hspace*{10mm}(\_)))\orgunit)\_)}
 \end{textblock*}}
 

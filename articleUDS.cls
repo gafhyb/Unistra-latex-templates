@@ -11,9 +11,11 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
+\LoadClass[a4paper,11pt]{article}
+
 \RequirePackage[paper=a4paper]{geometry}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[francais]{babel}
+
 \RequirePackage{graphicx}
 \RequirePackage{fancyhdr}
 \RequirePackage{url}
@@ -24,9 +26,11 @@
 \RequirePackage{bbding}
 \RequirePackage{ifmtarg}
 
+\RequirePackage{fontspec}
+\RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
+
 \ProvidesClass{articleUDS}[2009/10/22 v1.0]
 
-\LoadClass[a4paper,11pt]{article}
 
 %    ****************************************
 %    *             MISE EN PAGE             *
@@ -35,6 +39,16 @@
 \renewcommand{\rmdefault}{phv} % Arial
 \renewcommand{\sfdefault}{phv} % Arial
 \renewcommand{\headrulewidth}{0pt} % Suppression de la ligne d'en tete
+
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont[Mapping=tex-text, Color=textcolor, Scale=0.85]{Unistra A}
+
+\newfontfamily\bodyfont[]{Unistra A}
+\newfontfamily\symbol[]{Unistra Symbol}
+\newfontfamily\encadre[]{Unistra Encadre}
+\newfontfamily\headingfont[Scale=0.85]{Unistra A}
+
+\newcommand{\unistra}{\fontfamily{Unistra A}\selectfont} % Latin Modern Roman
 
 \geometry{margin={50pt}}
 \fancyhf{} % Suppression du style existant

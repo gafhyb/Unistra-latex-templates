@@ -25,10 +25,8 @@
 \RequirePackage{textcomp}
 \RequirePackage{color}
 
-\usepackage{titlesec}
-\usepackage{titling}
 \RequirePackage{fontspec}
-\RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
+\RequirePackage{unicode-math}
 
 \ProvidesClass{reportUDS}[2017/10/30 v2.0]
 
@@ -36,7 +34,7 @@
 \setmainfont[Mapping=tex-text, Color=textcolor, Scale=0.85]{Unistra A}
 
 \newfontfamily\bodyfont[]{Unistra A}
-\newfontfamily\symbol[]{Unistra Symbol}
+\newfontfamily\picto[]{Unistra Symbol}
 \newfontfamily\encadre[]{Unistra Encadre}
 \newfontfamily\headingfont[Scale=0.85]{Unistra A}
 
@@ -51,13 +49,13 @@
 {\def\orgunit{#1}
 }
 
-\newenvironment{symboles}[1]
-{\def\symbols{#1}
+\newenvironment{pictoList}[1]
+{\def\pictos{#1}
 }
 
 \newcommand\logo
 {\begin{textblock*}{65mm}[0,0](10mm,15mm)
-{\color{red} \fontsize{60}{70} \symbol \symbols}\\
+{\color{red} \fontsize{60}{70} \picto \pictos}\\
 ~{\Large \encadre (\svc\_))\_)\vspace*{-0.075\baselineskip} \hspace*{10mm}(\_)))\orgunit)\_)}
 \end{textblock*}}
 
